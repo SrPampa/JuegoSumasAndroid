@@ -3,6 +3,8 @@ package com.example.sums;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -59,6 +61,20 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
 
+        }
+
+        //conexion con sqlite
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "db", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+
+        Cursor consulta = db.rawQuery("select * from score where puntuacion = (select max(puntuacion) from score)", null);
+        if(consulta.moveToFirst()){
+            String temp_alias = consulta.getString(0);
+            String temp_puntuacion = consulta.getString(1);
+            tv_mPunt.setText("Best Score "+ temp_puntuacion+ " de "+temp_alias);
+            db.close();
+        } else {
+            db.close();
         }
     }
 
