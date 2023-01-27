@@ -65,6 +65,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="150dp"
+        android:onClick="play"
         android:text="Play"
         android:textSize="24sp"
         android:textStyle="bold" />

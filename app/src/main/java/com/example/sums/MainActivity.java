@@ -2,10 +2,14 @@ package com.example.sums;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,4 +61,32 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    public void play(View view) {
+
+        String nombre = et_nombre.getText().toString();
+
+        if (!nombre.equals("")) {
+
+            Intent intent = new Intent(this, Nivel1.class);
+            intent.putExtra("player", nombre);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Primero debes escribir tu alias", Toast.LENGTH_SHORT).show();
+            //redirijo al jugador al et donde peude escribir su alias
+            et_nombre.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(et_nombre, InputMethodManager.SHOW_IMPLICIT);
+
+
+        }
+    }
+    //sobrescribo el botón de ir hacia atrás para que no se pueda en los niveles
+    @Override
+    public void onBackPressed(){
+
+    }
+
+
 }
