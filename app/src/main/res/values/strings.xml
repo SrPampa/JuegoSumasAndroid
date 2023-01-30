@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Sums</string>
+    <string name="numero2">numero2</string>
+    <string name="numero1">numero1</string>
+    <string name="intentos">Intentos:</string>
+    <string name="player">Player:</string>
+    <string name="puntuaci_n_0">Puntuación: 0</string>
+    <string name="intentos_restantes">intentos restantes</string>
+    <string name="signo_matematico">signo_matematico</string>
+    <string name="respuesta">Respuesta</string>
 </resources>
