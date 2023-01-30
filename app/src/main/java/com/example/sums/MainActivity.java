@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!nombre.equals("")) {
 
-            Intent intent = new Intent(this, Nivel1.class);
+            Intent intent = new Intent(this, Niveles.class);
             intent.putExtra("player", nombre);
             startActivity(intent);
             finish();
