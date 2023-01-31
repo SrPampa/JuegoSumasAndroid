@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +43,42 @@ public class Nivel1 extends AppCompatActivity {
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         numAleatorio();
+    }
+
+    public void comparar(View view) {
+
+        String respuesta = et_respuesta.getText().toString();
+        if (!respuesta.equals("")) {
+            int respuesta_jugador = Integer.parseInt(respuesta);
+            if (resultado == respuesta_jugador) {
+                score++;
+                tv_puntuacion.setText("Puntuación: " + score);
+            } else {
+                vidas--;
+                switch (vidas) {
+                    case 2:
+                        Toast.makeText(this, "Te quedan dos vidas", Toast.LENGTH_SHORT).show();
+                        iv_vidas.setImageResource(R.drawable.dosvidas);
+                        break;
+                    case 1:
+                        Toast.makeText(this, "Te quedan una vida", Toast.LENGTH_SHORT).show();
+                        iv_vidas.setImageResource(R.drawable.unavida);
+                        break;
+                    case 0:
+                        Toast.makeText(this, "Has perdido todas tus vidas. Fin de partida", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
+            }
+            et_respuesta.setText("");
+            numAleatorio();
+        } else {
+            Toast.makeText(this, "Escribe tu respuesta", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     public void numAleatorio() {
