@@ -97,9 +97,9 @@
         android:id="@+id/editTextNumber"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView_signo"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="241dp"
         android:autofillHints=""
         android:backgroundTint="#FDE62B2B"
         android:ems="10"
@@ -113,19 +113,19 @@
 
     <ImageButton
         android:id="@+id/imageButton_check"
-        android:layout_width="58dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="271dp"
-        android:layout_toEndOf="@+id/editTextNumber"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+
+
+        android:layout_alignParentTop="true"
+
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="312dp"
+        android:layout_marginTop="304dp"
         android:backgroundTint="@android:color/holo_green_light"
         android:contentDescription="@string/app_name"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
         android:src="@android:drawable/checkbox_on_background" />
 
 
