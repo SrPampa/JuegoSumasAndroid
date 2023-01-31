@@ -2,7 +2,10 @@ package com.example.sums;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -74,10 +77,11 @@ public class Nivel1 extends AppCompatActivity {
             }
             et_respuesta.setText("");
             numAleatorio();
+            dbDatos();
+
         } else {
             Toast.makeText(this, "Escribe tu respuesta", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
@@ -114,9 +118,44 @@ public class Nivel1 extends AppCompatActivity {
             startActivity(intent);
             finish();
 
-
         }
 
+    }
 
+    public void dbDatos() {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "db", null, 1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+
+        Cursor consulta = db.rawQuery("SELECT * FROM score WHERE puntuacion = (SELECT max(score) FROM puntaje)", null);
+        //hago una comprobación de si ha habido respuesta a la consulta
+        if (consulta.moveToFirst()) {
+            String temp_nombre = consulta.getString(0);
+            String temp_puntuacion = consulta.getString(1);
+
+            int bestScore = Integer.parseInt(temp_puntuacion);
+
+            if (score > bestScore) {
+                ContentValues modificacion = new ContentValues();
+                modificacion.put("alias", nombre);
+                modificacion.put("puntuacion", score);
+
+                db.update("score", modificacion, "puntuacion=" + bestScore, null);
+            }
+            db.close();
+        } else {
+            ContentValues insercion = new ContentValues();
+            insercion.put("alias", nombre);
+            insercion.put("puntuacion", score);
+
+            db.insert("score", null, insercion);
+            db.close();
+
+        }
+    }
+
+    //deshabilito otra vez el boton de atrás para evitar que se salgan de la app hacia el inicio de forma intencional
+    @Override
+    public void onBackPressed() {
+    //lo dejo vacío para que no haga nada
     }
 }
