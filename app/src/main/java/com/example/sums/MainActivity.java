@@ -52,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
                 iv_personaje.setImageResource(id);
                 break;
             case 3:
-                id = getResources().getIdentifier("escuadra", "drawable", getPackageName());
+                id = getResources().getIdentifier("rotu", "drawable", getPackageName());
                 iv_personaje.setImageResource(id);
                 break;
             case 4:
-                id = getResources().getIdentifier("cartabon", "drawable", getPackageName());
+                id = getResources().getIdentifier("goma", "drawable", getPackageName());
                 iv_personaje.setImageResource(id);
                 break;
             default:
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         if(consulta.moveToFirst()){
             String temp_alias = consulta.getString(0);
             String temp_puntuacion = consulta.getString(1);
-            tv_mPunt.setText("Best Score "+ temp_puntuacion+ " de "+temp_alias);
+            tv_mPunt.setText("Best Score: "+ temp_puntuacion+ " de "+temp_alias);
             db.close();
         } else {
             db.close();

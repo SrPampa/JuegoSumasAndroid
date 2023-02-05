@@ -126,7 +126,7 @@ public class Nivel1 extends AppCompatActivity {
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "db", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
 
-        Cursor consulta = db.rawQuery("SELECT * FROM score WHERE puntuacion = (SELECT max(score) FROM puntaje)", null);
+        Cursor consulta = db.rawQuery("SELECT * FROM score WHERE puntuacion = (SELECT max(puntuacion) FROM score)", null);
         //hago una comprobación de si ha habido respuesta a la consulta
         if (consulta.moveToFirst()) {
             String temp_nombre = consulta.getString(0);
