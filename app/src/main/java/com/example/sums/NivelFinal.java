@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Nivel5 extends AppCompatActivity {
+public class NivelFinal extends AppCompatActivity {
     private TextView tv_nombre, tv_puntuacion;
-    private ImageView iv_Auno, iv_Ados, iv_vidas;
+    private ImageView iv_Auno, iv_Ados, iv_vidas, iv_signo;
     private EditText et_respuesta;
 
     int score, numAletorio_uno, numAletorio_dos, resultado, vidas;
@@ -26,16 +26,16 @@ public class Nivel5 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nivel5);
+        setContentView(R.layout.activity_nivel_final);
 
-        Toast.makeText(this, "Nivel 5 - Multiplicaciones", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Modo Infinito", Toast.LENGTH_SHORT).show();
 
         tv_nombre = (TextView) findViewById(R.id.textView_player);
         tv_puntuacion = (TextView) findViewById(R.id.textView_puntuacion);
         iv_Auno = (ImageView) findViewById(R.id.imageView_num1);
         iv_Ados = (ImageView) findViewById(R.id.imageView_num2);
         iv_vidas = (ImageView) findViewById(R.id.imageView_corazones);
-
+        iv_signo = (ImageView) findViewById(R.id.imageView_signo);
         et_respuesta = (EditText) findViewById(R.id.editTextNumber);
 
         nombre = getIntent().getStringExtra("jugador");
@@ -102,12 +102,36 @@ public class Nivel5 extends AppCompatActivity {
 
     public void numAleatorio() {
 
-        if (score < 50) {
-            numAletorio_uno = (int) (Math.random() * 10);
-            numAletorio_dos = (int) (Math.random() * 10);
+        int operacion = (int) (Math.random() * 6);
+        numAletorio_uno = (int) (Math.random() * 10);
+        numAletorio_dos = (int) (Math.random() * 10);
 
+        if (score % 5 == 0) { //cada 5 puntos añado una multiplicación en este modo infinito para añadir una dificultad más
             resultado = numAletorio_uno * numAletorio_dos;
+            iv_signo.setImageResource(R.drawable.multiplicacion);
+        } else {
+            switch (operacion) { //con este switch controlo el porcentaje de veces que sale cada operación
+                case 0:
+                case 1:
+                case 2:
+                    resultado = numAletorio_uno - numAletorio_dos;
+                    iv_signo.setImageResource(R.drawable.resta);
+                    break; //para la resta 3 de cada 5 por la necesidad de utilizar la recursividad si el resultado es <0, que tenga mas posibilidades
+                case 3:
+                case 4:
+                    resultado = numAletorio_uno + numAletorio_dos;
+                    iv_signo.setImageResource(R.drawable.suma);
+                    break; //2 de 5 para la suma
+                case 5:
+                    resultado = numAletorio_uno * numAletorio_dos;
+                    iv_signo.setImageResource(R.drawable.multiplicacion);
+                    break; // 1 de 5 para la multiplicación porque ya va a salir cada 5 niveles si o si
+                default:
 
+            }
+        }
+
+        if (resultado >= 0) { //con esto controlo que la resta no de negativo
             for (int i = 0; i < numero.length; i++) {
                 int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
                 if (numAletorio_uno == i) {
@@ -117,19 +141,8 @@ public class Nivel5 extends AppCompatActivity {
                     iv_Ados.setImageResource(id);
                 }
             }
-
-
         } else {
-            Intent intent = new Intent(this, NivelFinal.class);
-            score_text = String.valueOf(score);
-            vidas_txt = String.valueOf(vidas);
-            intent.putExtra("jugador", nombre);
-            intent.putExtra("score", score_text);
-            intent.putExtra("vidas", vidas_txt);
-
-            startActivity(intent);
-            finish();
-
+            numAleatorio();
         }
 
     }
