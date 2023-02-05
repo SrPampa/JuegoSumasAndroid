@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondoniveles"
     android:foregroundTint="#00FFFFFF"
-    tools:context=".Nivel3">
+    tools:context=".Nivel4">
 
     <TextView
         android:id="@+id/textView_intentos"

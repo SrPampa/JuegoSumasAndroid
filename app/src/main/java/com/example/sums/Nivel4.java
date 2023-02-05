@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Nivel3 extends AppCompatActivity {
+public class Nivel4 extends AppCompatActivity {
     private TextView tv_nombre, tv_puntuacion;
-    private ImageView iv_Auno, iv_Ados, iv_vidas;
+    private ImageView iv_Auno, iv_Ados, iv_vidas, iv_signo;
     private EditText et_respuesta;
 
     int score, numAletorio_uno, numAletorio_dos, resultado, vidas;
@@ -26,15 +26,16 @@ public class Nivel3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nivel3);
+        setContentView(R.layout.activity_nivel4);
 
-        Toast.makeText(this, "Nivel 3 - Restas", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Nivel 4 - Sumas y restas", Toast.LENGTH_SHORT).show();
 
         tv_nombre = (TextView) findViewById(R.id.textView_player);
         tv_puntuacion = (TextView) findViewById(R.id.textView_puntuacion);
         iv_Auno = (ImageView) findViewById(R.id.imageView_num1);
         iv_Ados = (ImageView) findViewById(R.id.imageView_num2);
         iv_vidas = (ImageView) findViewById(R.id.imageView_corazones);
+        iv_signo = (ImageView) findViewById(R.id.imageView_signo);
         et_respuesta = (EditText) findViewById(R.id.editTextNumber);
 
         nombre = getIntent().getStringExtra("jugador");
@@ -101,12 +102,21 @@ public class Nivel3 extends AppCompatActivity {
 
     public void numAleatorio() {
 
-        if (score < 30) {
+        if (score < 40) {
             numAletorio_uno = (int) (Math.random() * 10);
             numAletorio_dos = (int) (Math.random() * 10);
 
-            resultado = numAletorio_uno - numAletorio_dos;
-            if (resultado >= 0) { //CONTROLO QUE NO HAYA NUMEROS NEGATIVOS
+
+            if (numAletorio_uno >= 0 && numAletorio_uno <= 4) {
+                resultado = numAletorio_uno + numAletorio_dos;
+                iv_signo.setImageResource(R.drawable.suma);
+            } else {
+                resultado = numAletorio_uno - numAletorio_dos;
+                iv_signo.setImageResource(R.drawable.resta);
+            }
+
+
+            if (resultado >= 0) {
                 for (int i = 0; i < numero.length; i++) {
                     int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
                     if (numAletorio_uno == i) {
@@ -122,7 +132,7 @@ public class Nivel3 extends AppCompatActivity {
 
 
         } else {
-            Intent intent = new Intent(this, Nivel4.class);
+            Intent intent = new Intent(this, Nivel5.class);
             score_text = String.valueOf(score);
             vidas_txt = String.valueOf(vidas);
             intent.putExtra("jugador", nombre);
