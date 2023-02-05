@@ -28,7 +28,7 @@ public class Nivel1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_niveles);
+        setContentView(R.layout.activity_nivel1);
 
         Toast.makeText(this, "Nivel 1 - Sumas básicas", Toast.LENGTH_SHORT).show();
 

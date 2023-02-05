@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-    //sobrescribo el botón de ir hacia atrás para que no se pueda en los niveles
+    //sobrescribo el botón de ir hacia atrás para que no se pueda salir ni retroceder en los niveles
     @Override
     public void onBackPressed(){
 

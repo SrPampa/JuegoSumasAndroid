@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondoniveles"
     android:foregroundTint="#00FFFFFF"
-    tools:context=".Nivel1">
+    tools:context=".Nivel2">
 
     <TextView
         android:id="@+id/textView_intentos"
@@ -117,8 +117,8 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="222dp"
         android:layout_toEndOf="@+id/editTextNumber"
         android:backgroundTint="@android:color/holo_green_light"
         android:contentDescription="@string/app_name"
